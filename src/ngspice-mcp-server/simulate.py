@@ -1,4 +1,4 @@
-import subprocess
+import asyncio
 import os
 import sys
 import tempfile
@@ -7,7 +7,7 @@ import logging
 from typing import Optional
 from pathlib import Path
 
-def ngspice_simulate(
+async def ngspice_simulate(
     circuit: str
 ) -> dict:
     """
@@ -20,30 +20,33 @@ def ngspice_simulate(
         str: The results of the simulation.
     """
     # 创建临时文件保存电路文件
-    with tempfile.NamedTemporaryFile(suffix=".cir", delete=False) as f:
-        circuit_name = f.name
-        f.write(circuit.encode('utf-8'))
-        f.flush()
-        os.fsync(f.fileno())
-    cmd = ["ngspice", "-b", circuit_name]
+    
     
     try:
-        ret = subprocess.run(cmd, 
-                            stderr=subprocess.PIPE,
-                            stdout=subprocess.PIPE,
-                            check=False,
-                            )
-        return {
-            "status": "success",
-            "message": ret.stdout,
-        }
-    except subprocess.CalledProcessError as e:
+        with tempfile.NamedTemporaryFile(suffix=".cir", delete=False) as f:
+            circuit_name = f.name
+            f.write(circuit.encode('utf-8'))
+            f.flush()
+            os.fsync(f.fileno())
+            cmd = ["ngspice", "-b", circuit_name]
+            process = await asyncio.create_subprocess_exec(
+                *cmd,
+                stderr=asyncio.subprocess.PIPE,
+                stdout=asyncio.subprocess.PIPE
+            )
+            stdout, stderr = await process.communicate()
+            
+            return {
+                "status": "success",
+                "message": stdout,
+            }
+    except Exception as e:
         return {
             "status": "error",
-            "message": e.stderr,
+            "message": str(e).encode('utf-8'),
         }
 
-if __name__ == "__main__":
+async def test():
     # Example usage
     circuit = """
 * High Pass Filter Circuit
@@ -65,5 +68,8 @@ C1 out 0 0.1uF
 """
     circuit_name = "high_pass_filter.cir"
     
-    result = ngspice_simulate(circuit)
+    result = await ngspice_simulate(circuit)
     print(result)
+
+if __name__ == "__main__":
+    asyncio.run(test())

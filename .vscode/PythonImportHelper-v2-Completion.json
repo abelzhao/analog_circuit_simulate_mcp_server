@@ -89,6 +89,14 @@
         "documentation": {}
     },
     {
+        "label": "AsyncIterator",
+        "importPath": "collections.abc",
+        "description": "collections.abc",
+        "isExtraImport": true,
+        "detail": "collections.abc",
+        "documentation": {}
+    },
+    {
         "label": "Server",
         "importPath": "mcp.server.lowlevel",
         "description": "mcp.server.lowlevel",
@@ -102,6 +110,15 @@
         "description": "mcp.server.streamable_http_manager",
         "isExtraImport": true,
         "detail": "mcp.server.streamable_http_manager",
+        "documentation": {}
+    },
+    {
+        "label": "mcp.types",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "mcp.types",
+        "description": "mcp.types",
+        "detail": "mcp.types",
         "documentation": {}
     },
     {
@@ -121,7 +138,7 @@
         "documentation": {}
     },
     {
-        "label": "Recieve",
+        "label": "Receive",
         "importPath": "starlette.types",
         "description": "starlette.types",
         "isExtraImport": true,
@@ -153,12 +170,12 @@
         "documentation": {}
     },
     {
-        "label": "subprocess",
+        "label": "asyncio",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "subprocess",
-        "description": "subprocess",
-        "detail": "subprocess",
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
         "documentation": {}
     },
     {
@@ -200,7 +217,7 @@
         "kind": 5,
         "importPath": ".venv.bin.activate_this",
         "description": ".venv.bin.activate_this",
-        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspace-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))",
+        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspice-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))",
         "detail": ".venv.bin.activate_this",
         "documentation": {}
     },
@@ -209,7 +226,7 @@
         "kind": 5,
         "importPath": ".venv.bin.activate_this",
         "description": ".venv.bin.activate_this",
-        "peekOfCode": "base = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspace-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)",
+        "peekOfCode": "base = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspice-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)",
         "detail": ".venv.bin.activate_this",
         "documentation": {}
     },
@@ -218,7 +235,7 @@
         "kind": 5,
         "importPath": ".venv.bin.activate_this",
         "description": ".venv.bin.activate_this",
-        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspace-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix",
+        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir, *os.environ.get(\"PATH\", \"\").split(os.pathsep)])\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspice-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix",
         "detail": ".venv.bin.activate_this",
         "documentation": {}
     },
@@ -227,7 +244,7 @@
         "kind": 5,
         "importPath": ".venv.bin.activate_this",
         "description": ".venv.bin.activate_this",
-        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspace-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\nos.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspice-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
         "detail": ".venv.bin.activate_this",
         "documentation": {}
     },
@@ -236,7 +253,7 @@
         "kind": 5,
         "importPath": ".venv.bin.activate_this",
         "description": ".venv.bin.activate_this",
-        "peekOfCode": "os.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspace-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV_PROMPT\"] = \"ngspice-mcp-server\" or os.path.basename(base)  # noqa: SIM222\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.11/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
         "detail": ".venv.bin.activate_this",
         "documentation": {}
     },
@@ -281,17 +298,8 @@
         "kind": 2,
         "importPath": "src.ngspice-mcp-server.server",
         "description": "src.ngspice-mcp-server.server",
-        "peekOfCode": "def main(port, api_key, log_level, json_response):\n    # 设置logging配置参数\n    logging.basicConfig(level=log_level.upper(), \n                        format='%(asctime)s - %(levelname)s - %(message)s')\n    logger = logging.getLogger(\"ngspice-mcp-server\")\n    logger.info(\"Starting ngspice-mcp-server...\")\n    logger.info(f\"Server running on port {port}\")\n    logger.info(f\"API key: {api_key}\")\n    logger.info(f\"Log level: {log_level}\")\n    logger.info(f\"JSON response: {json_response}\")",
+        "peekOfCode": "def main(port, log_level, json_response):\n    # 设置logging配置参数\n    logging.basicConfig(level=log_level.upper(), \n                        format='%(asctime)s - %(levelname)s - %(message)s')\n    logger = logging.getLogger(\"ngspice-mcp-server\")\n    logger.info(\"Starting ngspice-mcp-server...\")\n    logger.info(f\"Server running on port {port}\")\n    logger.info(f\"Log level: {log_level}\")\n    logger.info(f\"JSON response: {json_response}\")\n    # 创建mcp服务",
         "detail": "src.ngspice-mcp-server.server",
-        "documentation": {}
-    },
-    {
-        "label": "ngspice_simulate",
-        "kind": 2,
-        "importPath": "src.ngspice-mcp-server.simulate",
-        "description": "src.ngspice-mcp-server.simulate",
-        "peekOfCode": "def ngspice_simulate(\n    circuit: str\n) -> dict:\n    \"\"\"\n    Simulate a circuit using ngspice.\n    Args:\n        circuit (str): The circuit to simulate.\n    Returns:\n        str: The results of the simulation.\n    \"\"\"",
-        "detail": "src.ngspice-mcp-server.simulate",
         "documentation": {}
     }
 ]

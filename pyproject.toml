@@ -1,13 +1,30 @@
 [project]
-name = "ngspace-mcp-server"
+name = "ngspice-mcp-server"
 version = "0.1.0"
-description = "Add your description here"
+description = "使用ngspice做电路模型仿真的MCP服务"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "anyio>=4.9.0",
+    "fastapi>=0.115.12",
     "httpx>=0.28.1",
     "logging>=0.4.9.6",
-    "mcp[cli]>=1.9.0",
+    "mcp[cli]==1.9.0",
+    "setuptools>=80.7.1",
     "starlette>=0.46.2",
+    "uvicorn>=0.34.2",
+    "wheel>=0.45.1",
 ]
+
+[build-system]
+requires = ["setuptools>=68.2.2", "wheel>=0.37.1"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+ngspice-mcp-server = "ngspice_mcp_server:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
