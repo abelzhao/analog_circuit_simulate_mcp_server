@@ -1,0 +1,13 @@
+[project]
+name = "ngspace-mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "anyio>=4.9.0",
+    "httpx>=0.28.1",
+    "logging>=0.4.9.6",
+    "mcp[cli]>=1.9.0",
+    "starlette>=0.46.2",
+]
