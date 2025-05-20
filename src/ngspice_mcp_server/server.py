@@ -12,7 +12,7 @@ from starlette.applications import Starlette
 from starlette.routing import Mount
 from starlette.types import Receive, Scope, Send
 
-from simulate import ngspice_simulate
+from .simulate import ngspice_simulate
 
 @click.command()
 @click.option('--port', type=int, default=4044, help='Port to run the server on')
