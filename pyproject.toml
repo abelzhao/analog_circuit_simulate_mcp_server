@@ -1,5 +1,5 @@
 [project]
-name = "ngspice-mcp-server"
+name = "ngspice_mcp_server"
 version = "0.1.0"
 description = "使用ngspice做电路模型仿真的MCP服务"
 readme = "README.md"
@@ -21,7 +21,7 @@ requires = ["setuptools>=68.2.2", "wheel>=0.37.1"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-ngspice-mcp-server = "ngspice-mcp-server.server:main"
+ngspice_mcp_server = "ngspice_mcp_server.server:main"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
