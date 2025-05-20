@@ -1,6 +1,6 @@
 # ngspice-mcp-server
 
-A Model Context Protocol (MCP) server for ngspice circuit simulation.
+A Model Context Protocol (MCP) server for ngspice circuit simulation
 
 ## Features
 
@@ -9,101 +9,103 @@ A Model Context Protocol (MCP) server for ngspice circuit simulation.
 - Supports parameterized circuit simulations
 - Returns simulation results in JSON format
 
-## Installation
+## Installation Guide (Linux only)
 
-1. Ensure you have Python 3.8+ installed (see .python-version)
-2. Install dependencies:
+1. Install ngspice (required for simulation backend):
    ```bash
-   pip install -e .
+   sudo apt-get install ngspice  # For Debian/Ubuntu systems
    ```
-3. Install ngspice (required for simulation backend):
+
+2. Ensure Python 3.8+ is installed (see .python-version file) and install uv tool:
    ```bash
-   sudo apt-get install ngspice  # For Debian/Ubuntu
+   pip install uv
    ```
+
+3. Create and activate virtual environment:
+   ```bash
+   uv venv .venv
+   source .venv/bin/activate  # Linux/macOS
+   ```
+
+4. Install dependencies using different methods:
+   - Direct installation with uv:
+     ```bash
+     uv pip install -e .
+     ```
+   - Build with uv then install:
+     ```bash
+     uv build && pip install dist/ngspice_mcp_server-${version}-py3-none-any.whl
+     # or uv build && pip install dist/ngspice_mcp_server-${version}.tar.gz
+     ```
+   - Traditional pip installation:
+     ```bash
+     pip install -e .
+     ```
 
 ## Usage
 
-### Running the Server
+### Starting the Server
+Different ways to run the server:
+- Using uv run:
+  ```bash
+  uv run ngspice-mcp-server
+  ```
+- Using uvx (requires uvx installation):
+  ```bash
+  uvx --from https://github.com/abelzhao/ngspice_mcp_server.git ngspice-mcp-server
+  ```
 
-Start the MCP server:
-```bash
-python -m ngspice_mcp_server
+### NPX Configuration
 ```
-
-### Example API Calls
-
-Run a simulation with a circuit file:
-```bash
-curl -X POST http://localhost:8000/simulate \
-  -H "Content-Type: application/json" \
-  -d '{"circuit": "high_pass_filter.cir"}'
-
-#### Response Format
-Successful simulation response:
-```json
 {
-  "status": "completed",
-  "results": {
-    "vout": [0.0, 0.5, 1.0, ...],
-    "frequency": [10, 100, 1000, ...]
-  },
-  "metadata": {
-    "simulation_time": "0.45s",
-    "circuit": "high_pass_filter.cir"
+  "mcpServers": {
+    "ngspice-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "http://${server_ip}:4044/mcp/"
+      ]
+    }
   }
 }
 ```
 
-### Configuration
+### Configuration Options
 
 Server configuration can be modified in `src/ngspice-mcp-server/server.py`:
 - Port number
-- Logging level
-- Simulation timeout
 
-### Client Configuration
+## Development Guide
 
-To connect to the MCP server from a client application:
+# ngspice-mcp-server Project Structure
 
-1. Install the MCP client library:
-```bash
-pip install model-context-protocol
+```
+.
+├── .gitignore
+├── .python-version
+├── high_pass_filter.cir         # Example circuit file
+├── pyproject.toml              # Python project configuration
+├── README.md                   # English documentation
+├── README.zh-CN.md             # Chinese documentation
+├── uv.lock                     # UV dependency lock file
+├── build/                      # Build directory
+└── src/                        # Source code directory
+    └── ngspice_mcp_server/     # Main package source
+        ├── __init__.py         # Package initialization
+        ├── __main__.py         # CLI entry point
+        ├── server.py           # MCP server implementation
+        └── simulate.py         # Simulation logic
 ```
 
-2. Configure the server URL (default is http://localhost:8000):
-```python
-from mcp import MCPClient
+## File Descriptions
 
-client = MCPClient(server_url="http://localhost:8000")
-```
-
-3. Example usage to run a simulation:
-```python
-response = client.use_tool(
-    tool_name="simulate",
-    arguments={"circuit": "high_pass_filter.cir"}
-)
-print(response["results"])
-```
-
-Environment variables can be used for configuration:
-- `MCP_SERVER_URL`: Override the default server URL
-- `MCP_API_KEY`: Set authentication key if required
-
-## Development
-
-### Project Structure
-
-- `src/ngspice-mcp-server/` - Main package source
-  - `server.py` - MCP server implementation
-  - `simulate.py` - Simulation logic
-  - `__main__.py` - CLI entry point
-- `high_pass_filter.cir` - Example circuit
-- `pyproject.toml` - Python project configuration
+- `high_pass_filter.cir`: Example circuit file for ngspice simulation demo
+- `src/ngspice_mcp_server/server.py`: Contains MCP server implementation and REST API interface
+- `src/ngspice_mcp_server/simulate.py`: Contains ngspice simulation logic and result processing
+- `pyproject.toml`: Defines Python package metadata, dependencies and build configuration
 
 ### Testing
 
-Run the test suite:
+Run test suite:
 ```bash
 pytest
 ```

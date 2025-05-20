@@ -9,97 +9,103 @@ ngspice电路仿真的模型上下文协议(MCP)服务器
 - 支持参数化电路仿真
 - 以JSON格式返回仿真结果
 
-## 安装指南
+## 安装指南（只在Linux系统下运行）
 
-1. 确保已安装Python 3.8+ (参见.python-version文件)
-2. 安装依赖:
-   ```bash
-   pip install -e .
-   ```
-3. 安装ngspice(仿真后端必需):
+1. 安装ngspice(仿真后端必需):
    ```bash
    sudo apt-get install ngspice  # Debian/Ubuntu系统
    ```
 
+2. 确保已安装Python 3.8+ (参见.python-version文件)和uv工具:
+   ```bash
+   pip install uv
+   ```
+
+3. 创建并激活虚拟环境:
+   ```bash
+   uv venv .venv
+   source .venv/bin/activate  # Linux/macOS
+   ```
+
+4. 使用不同方式安装依赖:
+   - 使用uv直接安装:
+     ```bash
+     uv pip install -e .
+     ```
+   - 使用uv build后安装:
+     ```bash
+     uv build && pip install dist/ngspice_mcp_server-${version}-py3-none-any.whl
+     # 或 uv build && pip install dist/ngspice_mcp_server-${version}.tar.gz
+     ```
+   - 使用传统pip安装:
+     ```bash
+     pip install -e .
+     ```
+
 ## 使用说明
 
 ### 启动服务器
+运行服务器的不同方式:
+- 使用uv run运行:
+  ```bash
+  uv run ngspice-mcp-server
+  ```
+- 使用uvx运行(需先安装uvx):
+  ```bash
+  uvx --from https://github.com/abelzhao/ngspice_mcp_server.git  ngspice-mcp-server
+  ```
 
-运行MCP服务器:
-```bash
-python -m ngspice_mcp_server
+### NPX
 ```
-
-### API调用示例
-
-使用电路文件运行仿真:
-```bash
-curl -X POST http://localhost:8000/simulate \
-  -H "Content-Type: application/json" \
-  -d '{"circuit": "high_pass_filter.cir"}'
-
-#### 响应格式
-成功仿真响应:
-```json
 {
-  "status": "completed",
-  "results": {
-    "vout": [0.0, 0.5, 1.0, ...],
-    "frequency": [10, 100, 1000, ...]
-  },
-  "metadata": {
-    "simulation_time": "0.45s",
-    "circuit": "high_pass_filter.cir"
+  "mcpServers": {
+    "ngspice-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "http://${server_ip}:4044/mcp/"
+      ]
+    }
   }
 }
 ```
+
+
+
 
 ### 配置选项
 
 服务器配置可在`src/ngspice-mcp-server/server.py`中修改:
 - 端口号
-- 日志级别
-- 仿真超时设置
 
-### 客户端配置
-
-从客户端应用连接MCP服务器的配置方法:
-
-1. 安装MCP客户端库:
-```bash
-pip install model-context-protocol
-```
-
-2. 配置服务器URL(默认为http://localhost:8000):
-```python
-from mcp import MCPClient
-
-client = MCPClient(server_url="http://localhost:8000")
-```
-
-3. 运行仿真实例:
-```python
-response = client.use_tool(
-    tool_name="simulate",
-    arguments={"circuit": "high_pass_filter.cir"}
-)
-print(response["results"])
-```
-
-可通过环境变量配置:
-- `MCP_SERVER_URL`: 覆盖默认服务器URL
-- `MCP_API_KEY`: 设置认证密钥(如需)
 
 ## 开发指南
 
-### 项目结构
+# ngspice-mcp-server 项目结构
 
-- `src/ngspice-mcp-server/` - 主包源代码
-  - `server.py` - MCP服务器实现
-  - `simulate.py` - 仿真逻辑
-  - `__main__.py` - CLI入口点
-- `high_pass_filter.cir` - 示例电路
-- `pyproject.toml` - Python项目配置
+```
+.
+├── .gitignore
+├── .python-version
+├── high_pass_filter.cir         # 示例电路文件
+├── pyproject.toml              # Python项目配置
+├── README.md                   # 英文文档
+├── README.zh-CN.md             # 中文文档
+├── uv.lock                     # UV依赖锁定文件
+├── build/                      # 构建目录
+└── src/                        # 源代码目录
+    └── ngspice_mcp_server/     # 主包源代码
+        ├── __init__.py         # 包初始化文件
+        ├── __main__.py         # CLI入口点
+        ├── server.py           # MCP服务器实现
+        └── simulate.py         # 仿真逻辑
+```
+
+## 文件说明
+
+- `high_pass_filter.cir`: 示例电路文件，用于演示ngspice仿真
+- `src/ngspice_mcp_server/server.py`: 包含MCP服务器实现和REST API接口
+- `src/ngspice_mcp_server/simulate.py`: 包含ngspice仿真逻辑和结果处理
+- `pyproject.toml`: 定义Python包元数据、依赖和构建配置
 
 ### 测试
 

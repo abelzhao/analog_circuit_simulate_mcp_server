@@ -125,12 +125,6 @@ wheels = [
 ]
 
 [[package]]
-name = "logging"
-version = "0.4.9.6"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/93/4b/979db9e44be09f71e85c9c8cfc42f258adfb7d93ce01deed2788b2948919/logging-0.4.9.6.tar.gz", hash = "sha256:26f6b50773f085042d301085bd1bf5d9f3735704db9f37c1ce6d8b85c38f2417", size = 96029 }
-
-[[package]]
 name = "markdown-it-py"
 version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -185,7 +179,6 @@ dependencies = [
     { name = "anyio" },
     { name = "fastapi" },
     { name = "httpx" },
-    { name = "logging" },
     { name = "mcp", extra = ["cli"] },
     { name = "setuptools" },
     { name = "starlette" },
@@ -198,7 +191,6 @@ requires-dist = [
     { name = "anyio", specifier = ">=4.9.0" },
     { name = "fastapi", specifier = ">=0.115.12" },
     { name = "httpx", specifier = ">=0.28.1" },
-    { name = "logging", specifier = ">=0.4.9.6" },
     { name = "mcp", extras = ["cli"], specifier = "==1.9.0" },
     { name = "setuptools", specifier = ">=80.7.1" },
     { name = "starlette", specifier = ">=0.46.2" },
