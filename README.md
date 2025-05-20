@@ -61,6 +61,35 @@ Server configuration can be modified in `src/ngspice-mcp-server/server.py`:
 - Logging level
 - Simulation timeout
 
+### Client Configuration
+
+To connect to the MCP server from a client application:
+
+1. Install the MCP client library:
+```bash
+pip install model-context-protocol
+```
+
+2. Configure the server URL (default is http://localhost:8000):
+```python
+from mcp import MCPClient
+
+client = MCPClient(server_url="http://localhost:8000")
+```
+
+3. Example usage to run a simulation:
+```python
+response = client.use_tool(
+    tool_name="simulate",
+    arguments={"circuit": "high_pass_filter.cir"}
+)
+print(response["results"])
+```
+
+Environment variables can be used for configuration:
+- `MCP_SERVER_URL`: Override the default server URL
+- `MCP_API_KEY`: Set authentication key if required
+
 ## Development
 
 ### Project Structure

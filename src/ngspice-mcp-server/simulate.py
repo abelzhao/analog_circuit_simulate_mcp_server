@@ -1,11 +1,7 @@
 import asyncio
 import os
-import sys
 import tempfile
-import shutil
-import logging
-from typing import Optional
-from pathlib import Path
+
 
 async def ngspice_simulate(
     circuit: str
@@ -66,8 +62,6 @@ C1 out 0 0.1uF
 .print ac vdb(out) vp(out)
 .end
 """
-    circuit_name = "high_pass_filter.cir"
-    
     result = await ngspice_simulate(circuit)
     print(result)
 

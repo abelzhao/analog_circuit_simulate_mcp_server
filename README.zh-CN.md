@@ -61,6 +61,35 @@ curl -X POST http://localhost:8000/simulate \
 - 日志级别
 - 仿真超时设置
 
+### 客户端配置
+
+从客户端应用连接MCP服务器的配置方法:
+
+1. 安装MCP客户端库:
+```bash
+pip install model-context-protocol
+```
+
+2. 配置服务器URL(默认为http://localhost:8000):
+```python
+from mcp import MCPClient
+
+client = MCPClient(server_url="http://localhost:8000")
+```
+
+3. 运行仿真实例:
+```python
+response = client.use_tool(
+    tool_name="simulate",
+    arguments={"circuit": "high_pass_filter.cir"}
+)
+print(response["results"])
+```
+
+可通过环境变量配置:
+- `MCP_SERVER_URL`: 覆盖默认服务器URL
+- `MCP_API_KEY`: 设置认证密钥(如需)
+
 ## 开发指南
 
 ### 项目结构

@@ -1,4 +1,5 @@
-from ngspice_mcp_server.server import main
+import sys
+from server import main
 
-if __name__ == "__main__":
-    main()
+# This is the entry point for the ngspice-mcp-server package.
+sys.exit(main())
