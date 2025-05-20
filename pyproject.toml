@@ -21,7 +21,7 @@ requires = ["setuptools>=68.2.2", "wheel>=0.37.1"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-ngspice-mcp-server = "ngspice-mcp-server.server:main"
+ngspice-mcp-server = "ngspice-mcp-server:main"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
