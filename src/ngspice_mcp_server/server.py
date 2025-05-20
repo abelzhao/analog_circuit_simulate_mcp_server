@@ -47,21 +47,27 @@ def main(port, log_level, json_response):
         )
         # simulate circuit
         try:
+            
+            logger.info(f"request circuit:\n {circuit}")
+
             result = await ngspice_simulate(circuit)
+
+            logger.info(f"response simulation:\n {result}")
+
             if result["status"] == "success":
                 await ctx.session.send_log_message(
                     level="info",
                     data=f"Simulation successful: {result['message']}",
                     related_request_id=ctx.request_id
                 )
-                return [mcp_types.TextContent(result["message"])]
+                return [mcp_types.TextContent(type='text', text=result["message"])]
             else:
                 await ctx.session.send_log_message(
                     level="error",
                     data=f"Simulation failed: {result['message']}",
                     related_request_id=ctx.request_id
                 )
-                return [mcp_types.TextContent(result["message"])]
+                return [mcp_types.TextContent(type='text', text=result["message"])]
         except Exception as e:
             await ctx.session.send_log_message(
                 level="error",

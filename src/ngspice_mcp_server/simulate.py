@@ -34,7 +34,7 @@ async def ngspice_simulate(
             
             return {
                 "status": "success",
-                "message": stdout,
+                "message": stdout.decode('utf-8'),
             }
     except Exception as e:
         return {
