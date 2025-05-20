@@ -1,5 +1,5 @@
 [project]
-name = "ngspice-mcp-server"
+name = "ngspice_mcp_server"
 version = "0.1.0"
 description = "使用ngspice做电路模型仿真的MCP服务"
 readme = "README.md"
@@ -8,7 +8,6 @@ dependencies = [
     "anyio>=4.9.0",
     "fastapi>=0.115.12",
     "httpx>=0.28.1",
-    "logging>=0.4.9.6",
     "mcp[cli]==1.9.0",
     "setuptools>=80.7.1",
     "starlette>=0.46.2",
