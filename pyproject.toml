@@ -1,7 +1,7 @@
 [project]
-name = "ngspice_mcp_server"
+name = "analog_circuit_simulate_mcp_server"
 version = "0.1.0"
-description = "使用ngspice做电路模型仿真的MCP服务"
+description = "模拟电路仿真MCP服务"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -22,7 +22,7 @@ requires = ["setuptools>=68.2.2", "wheel>=0.37.1"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-ngspice-mcp-server = "ngspice_mcp_server.fast_server:main"
+analog-circuit-simulate-mcp-server = "analog_circuit_simulate_mcp_server.fast_server:main"
 
 [tool.setuptools]
 package-dir = { "" = "src" }

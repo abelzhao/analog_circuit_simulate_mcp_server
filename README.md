@@ -1,10 +1,10 @@
-# ngspice-mcp-server
+# analog-circuit-simulate-mcp-server
 
-A Model Context Protocol (MCP) server for ngspice circuit simulation
+A Model Context Protocol (MCP) server for analog circuit simulation
 
 ## Features
 
-- Provides MCP tools for running ngspice simulations
+- Provides MCP tools for running analog circuit simulations
 - REST API interface for simulation control
 - Supports parameterized circuit simulations
 - Returns simulation results in JSON format
@@ -34,8 +34,8 @@ A Model Context Protocol (MCP) server for ngspice circuit simulation
      ```
    - Build with uv then install:
      ```bash
-     uv build && pip install dist/ngspice_mcp_server-${version}-py3-none-any.whl
-     # or uv build && pip install dist/ngspice_mcp_server-${version}.tar.gz
+     uv build && pip install dist/analog_circuit_simulate_mcp_server-${version}-py3-none-any.whl
+     # or uv build && pip install dist/analog_circuit_simulate_mcp_server-${version}.tar.gz
      ```
    - Traditional pip installation:
      ```bash
@@ -48,11 +48,11 @@ A Model Context Protocol (MCP) server for ngspice circuit simulation
 Different ways to run the server:
 - Using uv run:
   ```bash
-  uv run ngspice-mcp-server
+  uv run analog-circuit-simulate-mcp-server
   ```
 - Using uvx (requires uvx installation):
   ```bash
-  uvx --from https://github.com/abelzhao/ngspice_mcp_server.git ngspice-mcp-server
+  uvx --from https://github.com/abelzhao/analog_circuit_simulate_mcp_server.git ngspice-mcp-server
   ```
 
 ### NPX Configuration

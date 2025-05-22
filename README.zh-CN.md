@@ -1,6 +1,6 @@
-# ngspice-mcp-server
+# analog-circuit-simulate-mcp-server
 
-ngspice电路仿真的模型上下文协议(MCP)服务器
+模拟电路仿真的模型上下文协议(MCP)服务器
 
 ## 功能特性
 
