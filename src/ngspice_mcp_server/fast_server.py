@@ -34,18 +34,5 @@ def main(log_level):
             return result["message"]
         else:
             raise ValueError(result["message"])
-        
-    @mcp.tool(description="对当前屏幕截屏")
-    def take_screenshot() -> Image:
-        """对当前屏幕截屏
-        """
-        import pyautogui
 
-        buffer = io.BytesIO()
-
-        # if the file exceeds ~1MB, it will be rejected by Claude
-        screenshot = pyautogui.screenshot()
-        screenshot.convert("RGB").save(buffer, format="JPEG", quality=60, optimize=True)
-        return Image(data=buffer.getvalue(), format="jpeg")
-        
     mcp.run(transport="streamable-http")
