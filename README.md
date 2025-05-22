@@ -71,12 +71,13 @@ Different ways to run the server:
 
 ### Configuration Options
 
-Server configuration can be modified in `src/ngspice-mcp-server/server.py`:
-- Port number
+Server configuration can be modified in `.venv`:
+- FASTMCP_PORT=4044
+- FASTMCP_JSON_RESPONSE=True
 
 ## Development Guide
 
-# ngspice-mcp-server Project Structure
+# analog-circuit-simulate-mcp-server Project Structure
 
 ```
 .
@@ -89,7 +90,7 @@ Server configuration can be modified in `src/ngspice-mcp-server/server.py`:
 ├── uv.lock                     # UV dependency lock file
 ├── build/                      # Build directory
 └── src/                        # Source code directory
-    └── ngspice_mcp_server/     # Main package source
+    └── analog_circuit_simulate_mcp_server/     # Main package source
         ├── __init__.py         # Package initialization
         ├── __main__.py         # CLI entry point
         ├── server.py           # MCP server implementation
@@ -98,10 +99,26 @@ Server configuration can be modified in `src/ngspice-mcp-server/server.py`:
 
 ## File Descriptions
 
-- `high_pass_filter.cir`: Example circuit file for ngspice simulation demo
-- `src/ngspice_mcp_server/server.py`: Contains MCP server implementation and REST API interface
-- `src/ngspice_mcp_server/simulate.py`: Contains ngspice simulation logic and result processing
+- `high_pass_filter.cir`: Example circuit file for circuit simulation demo
+- `src/analog_circuit_simulate_mcp_server/server.py`: Contains MCP server implementation and REST API interface
+- `src/analog_circuit_simulate_mcp_server/simulate.py`: Contains circuit simulation logic and result processing
 - `pyproject.toml`: Defines Python package metadata, dependencies and build configuration
+
+
+### NPX
+```
+{
+  "mcpServers": {
+    "analog-circuit-simulate-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "http://${server_ip}:4044/mcp/"
+      ]
+    }
+  }
+}
+```
+
 
 ### Testing
 

@@ -4,7 +4,7 @@
 
 ## 功能特性
 
-- 提供运行ngspice仿真的MCP工具
+- 提供运行模拟电路仿真的MCP工具
 - 用于仿真控制的REST API接口
 - 支持参数化电路仿真
 - 以JSON格式返回仿真结果
@@ -34,8 +34,8 @@
      ```
    - 使用uv build后安装:
      ```bash
-     uv build && pip install dist/ngspice_mcp_server-${version}-py3-none-any.whl
-     # 或 uv build && pip install dist/ngspice_mcp_server-${version}.tar.gz
+     uv build && pip install dist/analog_circuit_simulate_mcp_server-${version}-py3-none-any.whl
+     # 或 uv build && pip install dist/analog_circuit_simulate_mcp_server-${version}.tar.gz
      ```
    - 使用传统pip安装:
      ```bash
@@ -48,18 +48,18 @@
 运行服务器的不同方式:
 - 使用uv run运行:
   ```bash
-  uv run ngspice-mcp-server
+  uv run analog-circuit-simulate-mcp-server
   ```
 - 使用uvx运行(需先安装uvx):
   ```bash
-  uvx --from https://github.com/abelzhao/ngspice_mcp_server.git  ngspice-mcp-server
+  uvx --from https://github.com/abelzhao/analog_circuit_simulate_mcp_server.git  analog-circuit-simulate-mcp-server
   ```
 
 ### NPX
 ```
 {
   "mcpServers": {
-    "ngspice-mcp-server": {
+    "analog-circuit-simulate-mcp-server": {
       "command": "uvx",
       "args": [
         "http://${server_ip}:4044/mcp/"
@@ -75,7 +75,8 @@
 ### 配置选项
 
 服务器配置可在`src/ngspice-mcp-server/server.py`中修改:
-- 端口号
+- FASTMCP_PORT=4044
+- FASTMCP_JSON_RESPONSE=True
 
 
 ## 开发指南
@@ -102,9 +103,9 @@
 
 ## 文件说明
 
-- `high_pass_filter.cir`: 示例电路文件，用于演示ngspice仿真
-- `src/ngspice_mcp_server/server.py`: 包含MCP服务器实现和REST API接口
-- `src/ngspice_mcp_server/simulate.py`: 包含ngspice仿真逻辑和结果处理
+- `high_pass_filter.cir`: 示例电路文件，用于演示模拟电路仿真
+- `src/analog_circuit_simulate_mcp_server/server.py`: 包含MCP服务器实现和REST API接口
+- `src/analog_circuit_simulate_mcp_server/simulate.py`: 包含模拟器仿真逻辑和结果处理
 - `pyproject.toml`: 定义Python包元数据、依赖和构建配置
 
 ### 测试
