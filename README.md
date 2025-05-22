@@ -52,7 +52,7 @@ Different ways to run the server:
   ```
 - Using uvx (requires uvx installation):
   ```bash
-  uvx --from https://github.com/abelzhao/analog_circuit_simulate_mcp_server.git ngspice-mcp-server
+  uvx --from https://github.com/abelzhao/analog_circuit_simulate_mcp_server.git analog-circuit-simulate-mcp-server
   ```
 
 ### NPX Configuration
