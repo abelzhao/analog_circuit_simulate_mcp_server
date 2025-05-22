@@ -4,13 +4,15 @@ import tempfile
 
 
 async def ngspice_simulate(
-    circuit: str
+    circuit: str,
+    option: str = "-b",
 ) -> dict:
     """
     Simulate a circuit using ngspice.
 
     Args:
         circuit (str): The circuit to simulate.
+        option (str): The ngspice option to use. Default is "-b" for batch mode.
 
     Returns:
         str: The results of the simulation.
@@ -24,7 +26,7 @@ async def ngspice_simulate(
             f.write(circuit.encode('utf-8'))
             f.flush()
             os.fsync(f.fileno())
-            cmd = ["ngspice", "-b", circuit_name]
+            cmd = ["ngspice", option, circuit_name]
             process = await asyncio.create_subprocess_exec(
                 *cmd,
                 stderr=asyncio.subprocess.PIPE,

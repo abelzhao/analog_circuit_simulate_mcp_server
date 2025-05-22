@@ -9,6 +9,8 @@ dependencies = [
     "fastapi>=0.115.12",
     "httpx>=0.28.1",
     "mcp[cli]==1.9.0",
+    "pillow>=11.2.1",
+    "pyautogui>=0.9.54",
     "setuptools>=80.7.1",
     "starlette>=0.46.2",
     "uvicorn>=0.34.2",

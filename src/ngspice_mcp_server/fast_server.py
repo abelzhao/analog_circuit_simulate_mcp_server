@@ -1,6 +1,8 @@
 import logging
 import click
+import io
 from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp.utilities.types import Image
 from .simulate import ngspice_simulate
 
 @click.command()
@@ -13,27 +15,37 @@ def main(log_level):
     logger.info("Starting ngspice-mcp-server...")
 
     # 构建mcp
-    mcp = FastMCP("ngspice-mcp-server")
+    mcp = FastMCP("ngspice-mcp-server", dependencies=["pyautogui", "Pillow"])
 
     # 请求函数
     @mcp.tool(description="调用ngspice进行电路仿真")
-    async def simulate(circuit: str, simulator:str = 'ngspice') -> str:
+    async def simulate(circuit: str, option:str = '-b') -> str:
         """调用ngspice进行电路仿真.
         Args:
             circuit (str): 需要仿真的SPICE电路.
-            simulator (str): 仿真器，当前只支持: 'ngspice'.
+            option (str): ngspice的选项. 默认是-b, 批处理模式.
         Returns:
             str: 仿真结果.
-        """
-        if simulator != 'ngspice':
-            raise ValueError("Unsupported simulator. Only 'ngspice' is supported.")
-        
+        """        
         logging.debug(f"request circuit:\n {circuit}")
-        result = await ngspice_simulate(circuit)
+        result = await ngspice_simulate(circuit, option)
         if result["status"] == "success":
             logging.debug(f"response simulation:\n {result}")
             return result["message"]
         else:
             raise ValueError(result["message"])
+        
+    @mcp.tool(description="对当前屏幕截屏")
+    def take_screenshot() -> Image:
+        """对当前屏幕截屏
+        """
+        import pyautogui
+
+        buffer = io.BytesIO()
+
+        # if the file exceeds ~1MB, it will be rejected by Claude
+        screenshot = pyautogui.screenshot()
+        screenshot.convert("RGB").save(buffer, format="JPEG", quality=60, optimize=True)
+        return Image(data=buffer.getvalue(), format="jpeg")
         
     mcp.run(transport="streamable-http")
